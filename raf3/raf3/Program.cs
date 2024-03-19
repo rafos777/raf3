@@ -1,50 +1,39 @@
 ﻿string nameToGuess = "rafou";
-Console.WriteLine("Suppose un mot:");
-string userInputName = Console.ReadLine();
+
+string userInputName;
 
 // Liste de lettres à ignorer
 List<char> lettersToIgnore = new List<char>();
-lettersToIgnore.Add('.');
+
 do
 {
-    for (int iGuess = 0; iGuess < nameToGuess.Length; iGuess++)
+    Console.WriteLine("Suppose un mot:");
+    userInputName = Console.ReadLine();
+
+    // iterons sur toutes les lettres du nom à deviner
+    foreach(char guessLetter in nameToGuess)
     {
-        char guessLetter = nameToGuess[iGuess];
-
-        Console.WriteLine($"Name to guess[{iGuess}] = {guessLetter}");
-
-        for (int iUserIndex = 0; iUserIndex < userInputName.Length; iUserIndex++)
+        // iterons sur toutes les lettres du mot entré par l'utilisateur
+        foreach (char userLetter in userInputName)
         {
-            char userLetter = userInputName[iUserIndex];
+            // si la lettre n'est pas à ignorer
+            //   on teste la lettre et si c'est la meme, on a gagné pour cette lettre
 
-            Console.WriteLine(lettersToIgnore.Count);
-            // Chercher si cette lettre n'est pas dans la liste des lettres à ignorer
-            for (int iIgnoreIndex = 0; iIgnoreIndex < lettersToIgnore.Count; iIgnoreIndex++)
+            if ( !lettersToIgnore.Contains(userLetter) )
             {
-                Console.WriteLine($"lettersToIgnore.Count = {lettersToIgnore.Count}, iIgnoreIndex = {iIgnoreIndex}");
-
-                char letterToIgnore = lettersToIgnore[iIgnoreIndex];
-
-                Console.WriteLine($"User input[{iUserIndex}] = {userLetter}");
-                Console.WriteLine($"Letter to ignore [{iIgnoreIndex}] = {letterToIgnore}");
-                if (userLetter != letterToIgnore)
+                // si c'est la meme
+                if (userLetter == guessLetter)
                 {
-                    Console.WriteLine("userLetter est différente de letterToIgnore");
-                    if (userLetter == guessLetter)
-                    {
-                        Console.WriteLine("E");
-                        Console.WriteLine($"Letter {userLetter} correct!");
-                        // Ajouter cette lettre à une liste de lettres à ignorer
+                    // on a gagné une lettre!
+                    Console.WriteLine($"Letter {userLetter} correct!");
 
-                        lettersToIgnore.Add(userLetter);
-                    }
+                    // Ajouter cette lettre à une liste de lettres à ignorer
+                    lettersToIgnore.Add(userLetter);
                 }
             }
         }
     }
-    Console.WriteLine("Suppose un mot:2");
-    userInputName = Console.ReadLine();
-
 }
 while (nameToGuess != userInputName);
+
 Console.WriteLine("you won");
