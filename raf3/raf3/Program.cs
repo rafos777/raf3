@@ -1,4 +1,4 @@
-﻿string nameToGuess = "r";
+﻿string nameToGuess = "rafou";
 
 string userInputName;
 
@@ -20,25 +20,37 @@ do
         {
             char userLetter = userInputName[j];
 
+            bool ignoreLetter = false;
+
             // Chercher si cette lettre n'est pas dans la liste des lettres à ignorer
-            for (int k = 0; k < (lettersToIgnore.Count+1); k++)
+            for (int k = 0; k < lettersToIgnore.Count; k++)
             {
                 char letterToIgnore = lettersToIgnore[k];
 
-                // si on ignore pas
-                if (userLetter != letterToIgnore)
+                // si lettre courante est une lettre à ignorer
+                if (userLetter == letterToIgnore)
                 {
-                    // si c'est la meme
-                    if (userLetter == guessLetter)
-                    {
-                        // on a gagné une lettre!
-                        Console.WriteLine($"Letter {userLetter} correct!");
-
-                        // Ajouter cette lettre à une liste de lettres à ignorer
-                        lettersToIgnore.Add(userLetter);
-                    }
+                    ignoreLetter = true;
                 }
             }
+
+            // si la lettre n'est pas à ignorer
+            //   on teste la lettre et si c'est la meme, on a gagné pour cette lettre
+
+            if (ignoreLetter == false)
+            {
+                // si c'est la meme
+                if (userLetter == guessLetter)
+                {
+                    // on a gagné une lettre!
+                    Console.WriteLine($"Letter {userLetter} correct!");
+
+                    // Ajouter cette lettre à une liste de lettres à ignorer
+                    lettersToIgnore.Add(userLetter);
+                }
+            }
+
+            // si la lettre est à ignorer on ne fait rien           
         }
     }
 }
