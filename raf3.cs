@@ -38,7 +38,7 @@ namespace ConsoleApp
                             Console.WriteLine($"Letter to ignore [{iIgnoreIndex}] = {letterToIgnore}");
                             if (userLetter!=letterToIgnore) 
                             {
-                                Console.WriteLine("D");
+                                Console.WriteLine("userLetter est différente de letterToIgnore");
                                 if( userLetter == guessLetter)
                                 {
                                     Console.WriteLine("E");
