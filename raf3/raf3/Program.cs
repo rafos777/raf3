@@ -11,33 +11,15 @@ do
     userInputName = Console.ReadLine();
 
     // iterons sur toutes les lettres du nom à deviner
-    for (int i = 0; i < nameToGuess.Length; i++)
+    foreach(char guessLetter in nameToGuess)
     {
-        char guessLetter = nameToGuess[i];
-
         // iterons sur toutes les lettres du mot entré par l'utilisateur
-        for (int j = 0; j < userInputName.Length; j++)
+        foreach (char userLetter in userInputName)
         {
-            char userLetter = userInputName[j];
-
-            bool ignoreLetter = false;
-
-            // Chercher si cette lettre n'est pas dans la liste des lettres à ignorer
-            for (int k = 0; k < lettersToIgnore.Count; k++)
-            {
-                char letterToIgnore = lettersToIgnore[k];
-
-                // si lettre courante est une lettre à ignorer
-                if (userLetter == letterToIgnore)
-                {
-                    ignoreLetter = true;
-                }
-            }
-
             // si la lettre n'est pas à ignorer
             //   on teste la lettre et si c'est la meme, on a gagné pour cette lettre
 
-            if (ignoreLetter == false)
+            if ( !lettersToIgnore.Contains(userLetter) )
             {
                 // si c'est la meme
                 if (userLetter == guessLetter)
@@ -49,8 +31,6 @@ do
                     lettersToIgnore.Add(userLetter);
                 }
             }
-
-            // si la lettre est à ignorer on ne fait rien           
         }
     }
 }
